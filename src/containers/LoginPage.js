@@ -1,8 +1,26 @@
 import LoginIcon from '@mui/icons-material/Login';
 import { Avatar, Box, Button, Grid, Link, Paper, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
+
+import { useAuth } from '../hooks/useAuth';
 
 const LoginPage = () => {
+
+  // TODO - handle email and password validations
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // TODO - handle authentication errors
+  const { loginState, authLoginEmailPassword } = useAuth();
+
+  const handleSubmit = (e) => {
+    console.log(`Login with email = ${email}; password = ${password}`);
+    authLoginEmailPassword(email, password);
+  };
+
+  // Disable login button when loading, or when a field is empty
+  const isLoginDisabled = loginState.loading || !email || !password;
+
   return (
     <Grid container component='main' sx={{ height: '100vh' }} direction={'row'}>
       {/* Side container with decoration */}
@@ -55,6 +73,8 @@ const LoginPage = () => {
               name='email'
               autoComplete='email'
               autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               error={false}
             />
 
@@ -67,6 +87,8 @@ const LoginPage = () => {
               label='Password'
               type='password'
               autoComplete='current-password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               error={false}
             />
 
@@ -76,6 +98,8 @@ const LoginPage = () => {
               fullWidth
               variant='contained'
               sx={{ mt: 3 }}
+              onClick={handleSubmit}
+              disabled={loginState.loading}
             >
               Login
             </Button>
@@ -89,6 +113,8 @@ const LoginPage = () => {
             >
               {"Don't have an account? Sign Up"}
             </Button>
+
+
 
             {/* Forgot password link */}
             <Typography textAlign={'center'} sx={{ mt: 3 }}>
