@@ -1,6 +1,7 @@
 import LoginIcon from '@mui/icons-material/Login';
-import { Avatar, Box, Button, Grid, Link, Paper, TextField, Typography } from '@mui/material';
+import { Alert, Avatar, Box, Button, Grid, Link, Paper, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -11,7 +12,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
 
   // TODO - handle authentication errors
-  const { loginState, authLoginEmailPassword } = useAuth();
+  const { user, loginState, authLoginEmailPassword } = useAuth();
 
   const handleSubmit = (e) => {
     console.log(`Login with email = ${email}; password = ${password}`);
@@ -20,6 +21,12 @@ const LoginPage = () => {
 
   // Disable login button when loading, or when a field is empty
   const isLoginDisabled = loginState.loading || !email || !password;
+
+
+  // Navigate to home page if login successful
+  if (user?.token) {
+    return <Navigate to='/' />
+  }
 
   return (
     <Grid container component='main' sx={{ height: '100vh' }} direction={'row'}>
@@ -92,6 +99,14 @@ const LoginPage = () => {
               error={false}
             />
 
+            <div>
+              {loginState.error &&
+                <Alert severity='error' sx={{ mt: 3 }}>
+                  Login Failed
+                </Alert>
+              }
+            </div>
+
             {/* Submit Button */}
             <Button
               type='button'
@@ -118,7 +133,7 @@ const LoginPage = () => {
 
             {/* Forgot password link */}
             <Typography textAlign={'center'} sx={{ mt: 3 }}>
-              <Link href='#' >
+              <Link href='/' >
                 Forgot Password
               </Link>
             </Typography>
