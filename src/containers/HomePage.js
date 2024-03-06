@@ -1,8 +1,10 @@
 import { ChatBubbleOutlineRounded, LogoutRounded, PeopleRounded, SettingsRounded } from '@mui/icons-material';
-import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import React from 'react';
+import ChatList from '../components/ChatList';
+import ChatWindow from '../components/ChatWindow';
 import { useAuth } from '../hooks/useAuth';
+import ChatContents from '../components/ChatContents';
 
 const drawerWidth = 300;
 
@@ -51,21 +53,15 @@ const HomePage = () => {
       </Drawer>
 
 
-      <Box sx={{ display: 'flex', height: '100vh', width: '100%', p: 4, boxSizing: 'border-box', overflow: 'hidden' }}>
+      <Box sx={{ display: 'flex', height: '100vh', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
         {/* Conversation List */}
         <Box sx={{ width: 500 }} >
-          <Paper variant='outlined' sx={{ height: '100%', borderRadius: 8, bgcolor: grey[50] }}>
-            <Typography variant='h5' sx={{ m: 2 }}>Messages</Typography>
-          </Paper>
+          <ChatList />
         </Box>
 
-        <Box sx={{ width: '2rem' }} />
-
         {/* Main window */}
-        <Box sx={{ width: '100%' }}>
-          <Paper variant='outlined' sx={{ height: '100%', borderRadius: 8, bgcolor: grey[50] }}>
-            <Typography variant='h5' sx={{ m: 2 }}>Main Window</Typography>
-          </Paper>
+        <Box sx={{ width: '100%', overflow: 'hidden' }}>
+          <ChatWindow />
         </Box>
 
       </Box>
