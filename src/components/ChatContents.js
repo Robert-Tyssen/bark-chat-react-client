@@ -14,8 +14,7 @@ const ChatContents = () => {
         height: 'auto',
         width: 'auto',
         flex: 1,
-        overflowY: 'scroll',
-        //overflow: 'scroll',
+        overflowY: 'auto',
       }}
     >
       {
