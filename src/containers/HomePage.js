@@ -3,9 +3,8 @@ import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Toolbar,
 import React from 'react';
 import ChatList from '../components/ChatList';
 import ChatWindow from '../components/ChatWindow';
+import { ChatListProvider } from '../contexts/ChatListContext';
 import { useAuth } from '../hooks/useAuth';
-import ChatContents from '../components/ChatContents';
-import { ChatProvider } from '../contexts/ChatContext';
 
 const drawerWidth = 300;
 
@@ -57,9 +56,9 @@ const HomePage = () => {
         {/* Conversation List */}
 
         <div style={{ minWidth: 250, flex: 1, }}>
-          <ChatProvider>
+          <ChatListProvider>
             <ChatList />
-          </ChatProvider>
+          </ChatListProvider>
         </div>
 
         {/* Main window */}

@@ -1,11 +1,15 @@
-import { Box, Paper, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useChatList } from '../hooks/useChatList';
 import ChatTile from './ChatTile';
-import { useChat } from '../hooks/useChat';
 
 const ChatList = () => {
 
-  const { selectedChat, selectChat } = useChat();
+  const { chats, selectedChat, selectChat, loadPage, loading, hasMore } = useChatList();
+
+  useEffect(() => {
+    loadPage();
+  }, []);
 
   return (
     <Box
@@ -21,9 +25,26 @@ const ChatList = () => {
 
       {/* Scrollable list of chat tiles */}
       <Box sx={{ height: 'auto', overflowY: 'auto' }}>
-        {Array.from({ length: 50 }).map(
-          (it, index) => <ChatTile onSelect={() => selectChat(index)} selected={selectedChat === index} />
+        {chats.map((it, index) =>
+          <ChatTile
+            key={index}
+            onSelect={() => selectChat(index.toString())}
+            selected={selectedChat === index.toString()}
+          />
         )}
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center', marginBottom: 100}}>
+          {loading
+            ? <CircularProgress />
+            : hasMore && <Button
+              variant='outlined'
+              onClick={loadPage}
+              sx={{ margin: 2 }}
+            >
+              Load More
+            </Button>
+          }
+
+        </div>
       </Box>
 
     </Box>
