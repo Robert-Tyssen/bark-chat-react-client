@@ -17,7 +17,7 @@ function App() {
 
             {/* Authenticated routes */}
             <Route element={<ProtectedRoute />}>
-              <Route path='/' element={<HomePage />} />
+              <Route path='/chats' element={<HomePage />} />
             </Route>
 
           </Routes>

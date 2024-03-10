@@ -1,8 +1,12 @@
 import { Box, Paper, Typography } from '@mui/material'
 import React from 'react'
 import ChatTile from './ChatTile';
+import { useChat } from '../hooks/useChat';
 
 const ChatList = () => {
+
+  const { selectedChat, selectChat } = useChat();
+
   return (
     <Box
       sx={{
@@ -17,7 +21,9 @@ const ChatList = () => {
 
       {/* Scrollable list of chat tiles */}
       <Box sx={{ height: 'auto', overflowY: 'auto' }}>
-        {Array.from({ length: 50 }).map((it, index) => <ChatTile />)}
+        {Array.from({ length: 50 }).map(
+          (it, index) => <ChatTile onSelect={() => selectChat(index)} selected={selectedChat === index} />
+        )}
       </Box>
 
     </Box>

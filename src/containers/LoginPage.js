@@ -25,7 +25,7 @@ const LoginPage = () => {
 
   // Navigate to home page if login successful
   if (user?.token) {
-    return <Navigate to='/' />
+    return <Navigate to='/chats' />
   }
 
   return (

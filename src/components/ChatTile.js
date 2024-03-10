@@ -1,13 +1,13 @@
 import { Avatar, ListItemAvatar, ListItemButton, ListItemText, Typography } from '@mui/material';
 import React from 'react';
 
-const ChatTile = () => {
+const ChatTile = ({ selected, onSelect }) => {
 
   const messagePreview = 'Test preview with an extra long description that might overflow and/or wrap to another line and cause the layout to be super weird but not sure how it should work';
   const timestamp = '9999-12-31 23:59:59';
 
   return (
-    <ListItemButton>
+    <ListItemButton onClick={onSelect} selected={selected}>
       { /* Avatar for list tile */}
       <ListItemAvatar>
         <Avatar />

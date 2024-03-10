@@ -5,6 +5,7 @@ import ChatList from '../components/ChatList';
 import ChatWindow from '../components/ChatWindow';
 import { useAuth } from '../hooks/useAuth';
 import ChatContents from '../components/ChatContents';
+import { ChatProvider } from '../contexts/ChatContext';
 
 const drawerWidth = 300;
 
@@ -52,15 +53,17 @@ const HomePage = () => {
       </Drawer>
 
 
-      <Box sx={{ display: 'flex', height: '100vh', width: '100vw'}}>
+      <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
         {/* Conversation List */}
 
         <div style={{ minWidth: 250, flex: 1, }}>
-          <ChatList />
+          <ChatProvider>
+            <ChatList />
+          </ChatProvider>
         </div>
 
         {/* Main window */}
-        <div style={{width: 'auto', minWidth: 'xs', flex: 2}}>
+        <div style={{ width: 'auto', minWidth: 'xs', flex: 2 }}>
           <ChatWindow />
         </div>
 
