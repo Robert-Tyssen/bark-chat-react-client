@@ -30,6 +30,7 @@ const ChatList = () => {
             key={index}
             onSelect={() => selectChat(index.toString())}
             selected={selectedChat === index.toString()}
+            isUnread={index % 5 === 0}
           />
         )}
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center', marginBottom: 100}}>
