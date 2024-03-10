@@ -1,6 +1,6 @@
-import { Box, Typography } from '@mui/material'
-import { grey } from '@mui/material/colors'
-import React from 'react'
+import { Box } from '@mui/material';
+import React from 'react';
+import Message from './Message';
 
 const ChatContents = () => {
   return (
@@ -8,7 +8,6 @@ const ChatContents = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: grey[100],
         boxSizing: 'border-box',
         p: 2,
         height: 'auto',
@@ -17,10 +16,9 @@ const ChatContents = () => {
         overflowY: 'auto',
       }}
     >
-      {
-        Array.from({ length: 25 }).map((it, index) => <Typography>Chat Content</Typography>)
+      {Array.from({ length: 25 }).map(
+        (it, index) => <Message isCurrentUser={index % 3 == 0} />)
       }
-
     </Box>
   )
 }
